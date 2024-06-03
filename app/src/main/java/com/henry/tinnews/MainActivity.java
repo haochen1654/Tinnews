@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
     NavigationUI.setupWithNavController(navigationView, navController);
 
-    NewsApi api = new RetrofitClient.newInstance(this).create(NewsApi.class);
+    NewsApi api = RetrofitClient.newInstance(this).create(NewsApi.class);
     api.getTopHeadlines("US")
         .enqueue(
             new Callback<NewsResponse>() {
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
               @Override
               public void onFailure(Call<NewsResponse> call, Throwable t) {
-                  Log.d("getTopheadlines", t.toString());
+                Log.d("getTopheadlines", t.toString());
               }
             });
   }
