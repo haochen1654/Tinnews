@@ -44,6 +44,8 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.8.1")
     implementation("com.squareup.retrofit2:converter-gson:2.8.1")
     testImplementation(libs.junit)
+    debugImplementation("com.ashokvarma.android:gander-imdb:3.1.0")
+    releaseImplementation("com.ashokvarma.android:gander-no-op:3.1.0")
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     compileOnly("org.projectlombok:lombok")
