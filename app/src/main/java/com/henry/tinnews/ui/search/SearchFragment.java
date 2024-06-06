@@ -1,4 +1,4 @@
-package com.henry.tinnews.ui.home;
+package com.henry.tinnews.ui.search;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,31 +12,28 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.henry.tinnews.databinding.FragmentHomeBinding;
+import com.henry.tinnews.databinding.FragmentSearchBinding;
 import com.henry.tinnews.repository.NewsRepository;
 import com.henry.tinnews.repository.NewsViewModelFactory;
 
-public class HomeFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
-  private FragmentHomeBinding binding;
-  private HomeViewModel viewModel;
+  private FragmentSearchBinding binding;
+  private SearchViewModel viewModel;
 
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    NewsRepository repository = new NewsRepository(getContext());
-    HomeViewModel homeViewModel =
-        new ViewModelProvider(this, new NewsViewModelFactory(repository)).get(HomeViewModel.class);
+    SearchViewModel SearchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
 
-    binding = FragmentHomeBinding.inflate(inflater, container, false);
+    binding = FragmentSearchBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
 
-    homeViewModel
-        .getTopHeadlines()
+    SearchViewModel.searchNews()
         .observe(
             getViewLifecycleOwner(),
             newsResponse -> {
               if (newsResponse != null) {
-                Log.d("HomeFragment", newsResponse.toString());
+                Log.d("SearchFragment", newsResponse.toString());
               }
             });
     return root;
@@ -48,15 +45,16 @@ public class HomeFragment extends Fragment {
 
     NewsRepository repository = new NewsRepository(getContext());
     viewModel =
-        new ViewModelProvider(this, new NewsViewModelFactory(repository)).get(HomeViewModel.class);
-    viewModel.setCountryInput("us");
+        new ViewModelProvider(this, new NewsViewModelFactory(repository))
+            .get(SearchViewModel.class);
+    viewModel.setSearchInput("Covid-19");
     viewModel
-        .getTopHeadlines()
+        .searchNews()
         .observe(
             getViewLifecycleOwner(),
             newsResponse -> {
               if (newsResponse != null) {
-                Log.d("HomeFragment", newsResponse.toString());
+                Log.d("SearchFragment", newsResponse.toString());
               }
             });
   }

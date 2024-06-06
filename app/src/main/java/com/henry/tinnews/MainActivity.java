@@ -52,30 +52,13 @@ public class MainActivity extends AppCompatActivity {
     // Passing each menu ID as a set of Ids because each
     // menu should be considered as top level destinations.
     mAppBarConfiguration =
-        new AppBarConfiguration.Builder(R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+        new AppBarConfiguration.Builder(R.id.nav_home, R.id.nav_search, R.id.nav_save)
             .setOpenableLayout(drawer)
             .build();
     NavController navController =
         Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
     NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
     NavigationUI.setupWithNavController(navigationView, navController);
-
-    NewsApi api = RetrofitClient.newInstance(this).create(NewsApi.class);
-    api.getTopHeadlines("US")
-        .enqueue(
-            new Callback<NewsResponse>() {
-              @Override
-              public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
-                Log.d(
-                    "getTopHeadlines",
-                    response.isSuccessful() ? response.body().toString() : response.toString());
-              }
-
-              @Override
-              public void onFailure(Call<NewsResponse> call, Throwable t) {
-                Log.d("getTopheadlines", t.toString());
-              }
-            });
   }
 
   @Override

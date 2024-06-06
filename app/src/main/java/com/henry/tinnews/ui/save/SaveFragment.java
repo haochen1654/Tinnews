@@ -1,4 +1,4 @@
-package com.henry.tinnews.ui.slideshow;
+package com.henry.tinnews.ui.save;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.henry.tinnews.databinding.FragmentSlideshowBinding;
+import com.henry.tinnews.databinding.FragmentSaveBinding;
 
-public class SlideshowFragment extends Fragment {
+public class SaveFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentSaveBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        SaveViewModel SaveViewModel =
+                new ViewModelProvider(this).get(SaveViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentSaveBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        SaveViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
